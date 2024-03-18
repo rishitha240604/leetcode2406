@@ -1,0 +1,92 @@
+class Node:
+    def __init__(self,val):
+        self.val = val
+        self.next = None
+
+class linkedlist:
+    def __init__(self):
+        self.head=None
+    def createll(self,n):
+        i=0
+        while i<n:
+            val=int(input("enter data:"))
+            new_node=Node(val)
+            if self.head==None:
+                self.head=new_node
+            else:
+                t=self.head
+                while t.next!=None:
+                    t=t.next
+                t.next=new_node
+            i=i+1
+    def show(self,head):
+        t=head
+        print("\nlist of nodes:")
+        s=0
+        while t:
+            print(t.val,end=" ")
+            s=s+t.val
+            t=t.next
+        print("\nTotal",s)
+    def split(self):
+        slow=self.head
+        fast=self.head
+        prev=None
+        while fast and fast.next:
+            prev=slow
+            slow=slow.next
+            fast=fast.next.next
+
+        second=slow
+        prev.next=None
+        print("\n1st linkedlist:")
+        self.show(self.head)
+        print("\n2nd linkedlist:")
+        self.show(second)
+   
+    #def reverseList(self, head):
+        #prev = None
+        #while head:
+            #cur = head
+            #head=head.next
+            #cur.next=prev
+        #return prev
+    
+    def isPalindrome(self,head) ->bool:
+        if head is None:
+            return True
+        slow = head
+        fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        prev = None
+        curr = slow
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        first = head
+        second = prev
+        while second:
+            if first.val !=second.val:
+                return False
+            first = first.next
+            second = second.next
+        return True    
+
+    
+    
+    
+obj=linkedlist()
+n=int(input("enter n val:"))
+obj.createll(n)
+obj.show(obj.head)
+obj.split()
+
+print("\n after isPalindrome:\n")
+obj.head=obj.isPalindrome(obj.head)
+obj.show(obj.head)
+
+             
